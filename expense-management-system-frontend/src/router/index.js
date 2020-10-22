@@ -16,6 +16,16 @@ const routes = [
     component: Home
   },
   {
+    path: '/index',
+    name: 'home',
+    component: Home
+  },
+  {
+    path: '/index.html',
+    name: 'home',
+    component: Home
+  },
+  {
     path: '/home',
     name: 'home',
     component: Home
