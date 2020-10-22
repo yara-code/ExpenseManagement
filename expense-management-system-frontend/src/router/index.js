@@ -4,7 +4,6 @@ import Home from '../views/Home.vue'
 import About from '../views/About'
 import Dashboard from "../views/Dashboard";
 import Settings from "../views/Settings";
-import Signup from "../views/Signup";
 import Expense from "../views/Expense";
 
 
@@ -41,11 +40,7 @@ const routes = [
     name: 'Settings',
     component: Settings
   },
-  {
-    path: '/signup',
-    name: 'SignUp',
-    component: Signup
-  },
+
 ]
 
 const router = new VueRouter({

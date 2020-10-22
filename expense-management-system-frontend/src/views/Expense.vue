@@ -1,7 +1,7 @@
 <template>
   <div>
     <ResponsiveNavView></ResponsiveNavView>
-    <h1>Expense</h1>
+    <h1 class="text-center">Expense</h1>
   </div>
 </template>
 

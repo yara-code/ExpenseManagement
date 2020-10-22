@@ -1,6 +1,9 @@
 <template>
   <div>
     <ResponsiveNavView></ResponsiveNavView>
+    <div>
+      <h1 class="text-center">Dashboard</h1>
+    </div>
   </div>
 </template>
 
