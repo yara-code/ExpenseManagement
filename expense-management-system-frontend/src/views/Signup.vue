@@ -1,15 +1,15 @@
 <template>
   <div class="home" >
     <v-content>
-      <router-link to="/dashboard">DashBoard Checkaaaa</router-link>
       <br><br><br><br><br>
       <v-card class="mx-auto" max-width="500px">
         <center><v-img height="50%" width="40%" src="../assets/icons.png"></v-img></center>
 
-        <v-card-title class="justify-center">Login</v-card-title>
-        <v-card-text id="errorMessage" class="text-center red--text" v-if="seen" >Incorrect username and/or password</v-card-text>
+        <v-card-title class="justify-center">Sign up</v-card-title>
+        <v-card-text id="errorMessage" class="text-center red--text" v-if="seen" >Missing Fields</v-card-text>
         <v-card-text>
           <v-text-field  v-model="username" label="Username" outlined shaped></v-text-field>
+          <v-text-field  v-model="email" label="Email" outlined shaped></v-text-field>
           <v-text-field
                   v-model="password"
                   outlined shaped label="Password"
@@ -18,10 +18,20 @@
                   hint="At least 8 characters"
                   value=""
                   class="input-group--focused"
+
+          ></v-text-field>
+          <v-text-field
+                  v-model="confirmPassword"
+                  outlined shaped label="ConfirmPassword"
+                  :type="show2 ? 'text' : 'password'"
+                  name="input-10-2"
+                  hint="At least 8 characters"
+                  value=""
+                  class="input-group--focused"
                   @keypress.enter="submit()"
           ></v-text-field>
-          <v-btn v-on:click="submit()" type="password" rounded color="primary">Login</v-btn>
-          <v-card-text> <router-link style="text-decoration: none" to="/signup">Don't have an Account? Sign up here.</router-link></v-card-text>
+          <v-btn v-on:click="submit()" type="password" rounded color="primary">Sign up</v-btn>
+          <v-card-text> <router-link style="text-decoration: none" to="/home">Already have an Account? Log in here.</router-link></v-card-text>
         </v-card-text>
       </v-card>
     </v-content>
@@ -32,11 +42,13 @@
     // @ is an alias to /src
 
     export default {
-        name: 'home',
+        name: 'Signup',
         data() {
             return {
                 username: '',
                 password:'',
+                email: '',
+                confirmPassword: '',
                 show2: false,
                 errorShow: false,
                 seen: false
