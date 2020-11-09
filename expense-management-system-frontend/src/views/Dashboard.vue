@@ -12,7 +12,9 @@
 
     export default {
         name: "Dashboard",
-        components: {ResponsiveNavView}
+        components: {
+            ResponsiveNavView,
+        }
 
     }
 </script>

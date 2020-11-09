@@ -11,8 +11,11 @@ export default {
   name: 'App',
   components: {
   },
-  data: () => ({
-  }),
+    data() {
+        return {
+            key: value
+        }
+    },
 };
 // comment
 </script>

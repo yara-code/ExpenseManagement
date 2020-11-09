@@ -10,7 +10,9 @@
 
     export default {
         name: "Expense",
-        components: {ResponsiveNavView}
+        components: {
+            ResponsiveNavView,
+        },
     }
 </script>
 
