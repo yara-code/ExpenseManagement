@@ -94,7 +94,7 @@
                 errorShow: false,
                 errMessage: '',
                 seen: false,
-                login: true,
+                login: this.$route.params.login && this.$route.params.login == 'false' ? false : true,
                 email: '',
                 confirmPassword: '',
                 accountCreate: false,

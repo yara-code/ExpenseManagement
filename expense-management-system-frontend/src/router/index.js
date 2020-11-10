@@ -5,6 +5,9 @@ import About from '../views/About'
 import Dashboard from "../views/Dashboard";
 import Settings from "../views/Settings";
 import Expense from "../views/Expense";
+import Landing from "../views/Landing";
+import Login from "../views/Login";
+import SignUp from "../views/SignUp";
 
 
 Vue.use(VueRouter)
@@ -12,23 +15,39 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: Home
+    name: 'landing',
+    component: Landing
   },
   {
     path: '/index',
-    name: 'home',
-    component: Home
+    name: 'landing',
+    component: Landing
   },
   {
     path: '/index.html',
-    name: 'home',
-    component: Home
+    name: 'landing',
+    component: Landing
+  },
+  {
+    path: '/landing',
+    name: 'landing',
+    component: Landing
   },
   {
     path: '/home',
     name: 'home',
-    component: Home
+    component: Home,
+    props: true
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    component: SignUp
   },
   {
     path: '/about',
