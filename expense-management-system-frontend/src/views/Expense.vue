@@ -16,6 +16,31 @@
 
       <section>
         <h1 class="text-center">Expense</h1>
+        <div class="pa-3">
+          <v-card max-width="90%" elevation="8">
+            <v-card-title>Add New Expense</v-card-title>
+            <div class="pa-2 float-left" style="width: 180px" ><v-select
+                    :items="items"
+                    label="Category"
+                    solo
+            ></v-select></div>
+
+            <div class="pa-4">
+              <v-text-field label="Title"></v-text-field>
+              <v-text-field label="Amount $"></v-text-field>
+              <v-textarea label="Notes" outlined></v-textarea>
+              <v-text-field label="Date" placeholder="MM-DD-YYYY (Empty for today's date)"></v-text-field>
+              <v-btn class="white--text" color="green" small rounded>Submit</v-btn>
+            </div>
+          </v-card>
+        </div>
+
+        <div class="pa-3">
+          <v-card max-width="90%" elevation="8">
+            <v-card-title class="justify-center">Expense History</v-card-title>
+            <ExpenseHistory></ExpenseHistory>
+          </v-card>
+        </div>
       </section>
     </div>
   </div>
@@ -23,15 +48,22 @@
 
 <script>
     import ResponsiveNavView from "../components/ResponsiveNavView";
+    import ExpenseHistory from "../components/ExpenseHistory";
 
     export default {
         name: "Expense",
         components: {
             ResponsiveNavView,
+            ExpenseHistory
         },
         data() {
             return {
-                sessionData: {}
+                title: '',
+                amount: '',
+                notes: '',
+                date: '',
+                sessionData: {},
+                items: ['Food', 'Clothes', 'Bills', "Entertainment", "Rent", "Other"],
             }
         },
         methods: {
