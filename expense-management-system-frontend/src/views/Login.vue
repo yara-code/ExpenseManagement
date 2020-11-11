@@ -143,7 +143,8 @@
 
                         if(response.accountId){
                             // log in successful:
-                            this.$store.dispatch('login');
+                            // this.$store.dispatch('login');
+                            sessionStorage.setItem('session', JSON.stringify(response))
                             this.$router.push('dashboard')
                         }
                     })

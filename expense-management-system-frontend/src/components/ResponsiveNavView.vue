@@ -1,5 +1,5 @@
 <template>
-  <div p-2>
+  <div  >
     <v-icon large  @click="drawer = !drawer" v-show="!drawer">mdi-menu</v-icon>
     <v-navigation-drawer app v-model="drawer" >
       <v-icon large  @click="drawer = !drawer" >mdi-backburger</v-icon>
@@ -23,6 +23,9 @@
         methods: {
             navigate: async function(route ) {
                 console.log(`clicked : ${route}`);
+                if (route == '/'){
+                    sessionStorage.clear();
+                }
                 await this.$router.push({path: route})
             }
         }
