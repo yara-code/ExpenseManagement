@@ -10,13 +10,34 @@
             // Overwriting base render method with actual data.
             // TODO: get data from sessionStorage and put it in an array
             // TODO:
-            let income = 1000;
-            let food = 105.254;
-            let clothes = 65.25;
-            let bills = 425.50;
-            let entertainment = 120.31;
-            let other = 400.00;
-            let rent = 1950.00;
+
+            let expenses = sessionStorage.getItem('expenses')
+            let parsedExpenses = JSON.parse(expenses)
+
+            let income = 0 //1000;
+            let food = 0 //105.254;
+            let clothes = 0 //65.25;
+            let bills = 0 //425.50;
+            let entertainment = 0 //120.31;
+            let other = 0 //400.00;
+            let rent = 0 //1950.00;
+
+            parsedExpenses.forEach((expense)=>{
+                switch(expense.category){
+                    case 'food':
+                        food += expense.amount
+                    case 'clothes':
+                        clothes += expense.amount
+                    case 'bills':
+                        bills += expense.amount
+                    case 'entertainment':
+                        entertainment += expense.amount
+                    case 'rent':
+                        rent += expense.amount
+                    case 'other':
+                        other += expense.amount
+                }
+            })
 
             let doughnutData = [food.toFixed(2), clothes.toFixed(2), bills.toFixed(2), entertainment.toFixed(2), rent.toFixed(2), other.toFixed(2)];
             this.renderChart({

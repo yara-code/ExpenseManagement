@@ -51,7 +51,7 @@
             <v-col>
               <div class="pt-4" >
                 <v-card elevation="8" class="pb-3" max-width="500px">
-                  <v-card-title class="justify-center text-center">Spending Habbits: </v-card-title>
+                  <v-card-title class="justify-center text-center">Spending Habits: </v-card-title>
                   <center><Chart></Chart></center>
                 </v-card>
 
