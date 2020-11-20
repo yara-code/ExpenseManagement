@@ -19,28 +19,47 @@
       <section>
         <div class="float-left pa-2">
           <h1 class="">Dashboard</h1>
-            <v-card elevation="4" max-width="170px">
-              <v-card-title class="text-center justify-center">Add Expense</v-card-title>
-              <center><v-btn color="white" fab elevation="0" @click="addExpense">
-                <v-icon color="green darken-2" large>mdi-plus-circle-outline</v-icon>
-              </v-btn></center>
-              <div class="py-1"></div>
-            </v-card>
 
-          <div class="pt-8">
-            <v-card elevation="8" max-width="700px">
-             <v-card-title class="justify-center text-center">Total Expense Per Week</v-card-title>
-              <center><Graph></Graph></center>
+<!--          DO NOT NEED -->
+<!--          <v-card elevation="4" max-width="170px">-->
+<!--            <v-card-title class="text-center justify-center">Add Expense</v-card-title>-->
+<!--            <center><v-btn color="white" fab elevation="0" @click="addExpense">-->
+<!--              <v-icon color="green darken-2" large>mdi-plus-circle-outline</v-icon>-->
+<!--            </v-btn></center>-->
+<!--            <div class="py-1"></div>-->
+<!--          </v-card>-->
 
+          <div class="pa-3">
+            <v-card max-width="90%" elevation="8">
+              <v-card-title class="justify-center">Expense History</v-card-title>
+              <ExpenseHistory></ExpenseHistory>
             </v-card>
           </div>
-          <div class="pt-4" >
-            <v-card elevation="8" class="pb-3" max-width="700px">
-              <v-card-title class="justify-center text-center">Spending Habbits: </v-card-title>
-              <center><Chart></Chart></center>
-            </v-card>
 
-          </div>
+
+          <v-row>
+            <v-col>
+              <div class="pt-8">
+                <v-card elevation="8" max-width="500px">
+                  <v-card-title class="justify-center text-center">Total Expense Per Week</v-card-title>
+                  <center><Graph></Graph></center>
+
+                </v-card>
+              </div>
+            </v-col>
+
+            <v-col>
+              <div class="pt-4" >
+                <v-card elevation="8" class="pb-3" max-width="500px">
+                  <v-card-title class="justify-center text-center">Spending Habbits: </v-card-title>
+                  <center><Chart></Chart></center>
+                </v-card>
+
+              </div>
+            </v-col>
+          </v-row>
+
+
 
 
         </div>
@@ -57,13 +76,16 @@
   import ResponsiveNavView from "../components/ResponsiveNavView";
   import Graph from "../components/Graph";
   import Chart from "../components/Chart";
+  import ExpenseHistory from "../components/ExpenseHistory";
+  import axios from "axios";
 
     export default {
         name: "Dashboard",
         components: {
             ResponsiveNavView,
             Graph,
-            Chart
+            Chart,
+            ExpenseHistory
         },
         data() {
             return {
@@ -78,7 +100,7 @@
                     this.$router.push('login')
                 } else {
                     this.sessionData = session;
-                    console.log(`session : ${JSON.stringify(session, null, 3)}`);
+                    console.log(`session : ${session}`);
                     console.log(`this.session : ${JSON.stringify(this.session, null, 3)}`);
                     return true
                 }
@@ -94,7 +116,6 @@
                 return this.sessionCheck();
             }
         }
-
     }
 </script>
 

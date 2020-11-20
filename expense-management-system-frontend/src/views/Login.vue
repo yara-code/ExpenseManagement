@@ -145,6 +145,11 @@
                             // log in successful:
                             // this.$store.dispatch('login');
                             sessionStorage.setItem('session', JSON.stringify(response))
+                            if(response.user.expenses){
+                                let ex = response.user.expenses
+                                let expenses = ex.reverse()
+                                sessionStorage.setItem('expenses', JSON.stringify(expenses))
+                            }
                             this.$router.push('dashboard')
                         }
                     })

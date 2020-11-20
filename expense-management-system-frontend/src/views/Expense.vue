@@ -14,6 +14,9 @@
       <section class="color1 hero white--text">
       </section>
 
+
+
+<!--            TODO: TOTAL amount spent-->
       <section>
         <h1 class="text-center">Expense</h1>
         <div class="pa-3">
@@ -23,24 +26,21 @@
                     :items="items"
                     label="Category"
                     solo
+                    v-model="selected"
             ></v-select></div>
 
+
             <div class="pa-4">
-              <v-text-field label="Title"></v-text-field>
-              <v-text-field label="Amount $"></v-text-field>
-              <v-textarea label="Notes" outlined></v-textarea>
-              <v-text-field label="Date" placeholder="MM-DD-YYYY (Empty for today's date)"></v-text-field>
-              <v-btn class="white--text" color="green" small rounded>Submit</v-btn>
+              <v-text-field v-model="title" label="Title"></v-text-field>
+              <v-text-field v-model="amount" label="Amount $"></v-text-field>
+<!--              <v-textarea label="Notes" outlined></v-textarea>-->
+              <v-text-field v-model="date" label="Date" placeholder="MM-DD-YYYY (Empty for today's date)"></v-text-field>
+              <v-btn class="white--text" color="green" small rounded @click="addExpense">Submit</v-btn>
             </div>
           </v-card>
         </div>
 
-        <div class="pa-3">
-          <v-card max-width="90%" elevation="8">
-            <v-card-title class="justify-center">Expense History</v-card-title>
-            <ExpenseHistory></ExpenseHistory>
-          </v-card>
-        </div>
+
       </section>
     </div>
   </div>
@@ -48,13 +48,12 @@
 
 <script>
     import ResponsiveNavView from "../components/ResponsiveNavView";
-    import ExpenseHistory from "../components/ExpenseHistory";
+    import axios from "axios";
 
     export default {
         name: "Expense",
         components: {
             ResponsiveNavView,
-            ExpenseHistory
         },
         data() {
             return {
@@ -62,7 +61,9 @@
                 amount: '',
                 notes: '',
                 date: '',
+                selected: 'Other',
                 sessionData: {},
+                items2: ["Expense", "Income"],
                 items: ['Food', 'Clothes', 'Bills', "Entertainment", "Rent", "Other"],
             }
         },
@@ -81,7 +82,50 @@
             },
 
             addExpense: function () {
-                this.$router.push('/expense')
+                // make api request to check creds:
+                // check if login or signup
+
+                const url = "https://mbk3bzr9d4.execute-api.us-west-1.amazonaws.com/dev/expense" // straight api url
+                let session = JSON.parse(sessionStorage.getItem('session'))
+
+                const data = {
+                    "title": this.title,
+                    "amount": this.amount,
+                    "date": this.date,
+                    "category": this.selected
+                };
+
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json',
+                        "Access-Control-Allow-Origin": "*",
+                        // "Access-Control-Allow-Credentials": false,
+                        'authorizationToken': session.sessionId,
+                    },
+                    crossDomain: true,
+                    withCredentials: false,
+                    data: data,
+                    url,
+                };
+
+                axios(options)
+                .then((results)=>{
+                    console.log(`results : ${JSON.stringify(results, null, 3)}`);
+                    let response = results.data
+                    console.log(`response : ${JSON.stringify(response, null, 3)}`);
+
+                    //TODO: Get sessionStorage for expense and add new expense to it
+                    // sessionStorage.setItem('session', JSON.stringify(response))
+                    let expenses = sessionStorage.getItem('expenses')
+                    let parsedExpenses = JSON.parse(expenses)
+                    parsedExpenses.push(data)
+                    sessionStorage.setItem('expenses', JSON.stringify(parsedExpenses.reverse()))
+                    this.$router.push('dashboard')
+                })
+                .catch((err)=>{
+                    console.log(`err : ${JSON.stringify(err, null, 3)}`);
+                })
             },
 
         },
