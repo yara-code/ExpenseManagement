@@ -27,6 +27,8 @@
                     label="Category"
                     solo
                     v-model="selected"
+                    hint="Category"
+                    persistent-hint
             ></v-select></div>
 
 
@@ -34,8 +36,33 @@
               <v-text-field v-model="title" label="Title"></v-text-field>
               <v-text-field v-model="amount" label="Amount $"></v-text-field>
 <!--              <v-textarea label="Notes" outlined></v-textarea>-->
-              <v-text-field v-model="date" label="Date" placeholder="MM-DD-YYYY (Empty for today's date)"></v-text-field>
-              <v-btn class="white--text" color="green" small rounded @click="addExpense">Submit</v-btn>
+              <v-menu
+                      v-model="menu2"
+                      :close-on-content-click="false"
+                      transition="scale-transition"
+                      offset-y
+                      max-width="290px"
+                      min-width="290px">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                          v-model="computedDateFormatted"
+                          label=""
+                          hint="MM/DD/YYYY format"
+                          persistent-hint
+                          prepend-icon="mdi-calendar"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-date-picker
+                        v-model="date"
+                        no-title
+                        @input="menu2 = false"
+                ></v-date-picker>
+              </v-menu>
+<!--              <v-text-field v-model="date2" label="Date" placeholder="MM-DD-YYYY (Empty for today's date)"></v-text-field>-->
+              <v-btn class="white--text mt-3" color="green" small rounded @click="addExpense">Submit</v-btn>
             </div>
           </v-card>
         </div>
@@ -60,11 +87,14 @@
                 title: '',
                 amount: '',
                 notes: '',
-                date: '',
+                date2: '',
                 selected: 'Other',
                 sessionData: {},
                 items2: ["Expense", "Income"],
                 items: ['Food', 'Clothes', 'Bills', "Entertainment", "Rent", "Other"],
+                menu2: false,
+                date: new Date().toISOString().substr(0, 10),
+                dateFormatted: this.formatDate(new Date().toISOString().substr(0, 10))
             }
         },
         methods: {
@@ -91,7 +121,7 @@
                 const data = {
                     "title": this.title,
                     "amount": this.amount,
-                    "date": this.date,
+                    "date": this.dateFormatted,
                     "category": this.selected
                 };
 
@@ -127,13 +157,33 @@
                     console.log(`err : ${JSON.stringify(err, null, 3)}`);
                 })
             },
+            formatDate (date) {
+                if (!date) return null
 
+                const [year, month, day] = date.split('-')
+                return `${month}/${day}/${year}`
+            },
+            parseDate (date) {
+                if (!date) return null
+
+                const [month, day, year] = date.split('/')
+                return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+            },
         },
+
         computed: {
             callSessionCheck: function () {
                 return this.sessionCheck();
-            }
-        }
+            },
+            computedDateFormatted () {
+                return this.formatDate(this.date)
+            },
+        },
+        watch: {
+            date (val) {
+                this.dateFormatted = this.formatDate(this.date)
+            },
+        },
     }
 </script>
 
