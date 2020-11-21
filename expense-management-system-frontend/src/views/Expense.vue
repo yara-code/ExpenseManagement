@@ -22,7 +22,8 @@
         <div class="pa-3">
           <v-card max-width="90%" elevation="8">
             <v-card-title>Add New Expense</v-card-title>
-            <div class="pa-2 float-left" style="width: 180px" ><v-select
+            <div class="pa-2 float-left" style="width: 210px" ><v-select
+                    prepend-inner-icon="mdi-form-select"
                     :items="items"
                     label="Category"
                     solo
@@ -33,8 +34,8 @@
 
 
             <div class="pa-4">
-              <v-text-field v-model="title" label="Title"></v-text-field>
-              <v-text-field v-model="amount" label="Amount $"></v-text-field>
+              <v-text-field prepend-inner-icon="mdi-clipboard-text" v-model="title" label="Title"></v-text-field>
+              <v-text-field prepend-inner-icon="mdi-cash-usd" v-model="amount" label="Amount $"></v-text-field>
 <!--              <v-textarea label="Notes" outlined></v-textarea>-->
               <v-menu
                       v-model="menu2"
@@ -69,6 +70,21 @@
 
 
       </section>
+
+      <section>
+        <h1 class="text-center">Income</h1>
+        <div class="pa-3">
+          <v-card max-width="90%" elevation="8">
+            <v-card-title>Update Your income</v-card-title>
+            <div class="pa-4">
+              <v-text-field prepend-inner-icon="mdi-cash-usd" persistent-hint hint="Total income amount will be updated." v-model="incomeAmount" label="Income Amount $"></v-text-field>
+              <v-btn class="white--text mt-3" color="green" small rounded @click="addIncome">Submit</v-btn>
+            </div>
+          </v-card>
+        </div>
+
+
+      </section>
     </div>
   </div>
 </template>
@@ -88,6 +104,8 @@
                 amount: '',
                 notes: '',
                 date2: '',
+                incomeAmount:'',
+                incomeTile: '',
                 selected: 'Other',
                 sessionData: {},
                 items2: ["Expense", "Income"],
@@ -108,6 +126,46 @@
                     console.log(`session : ${JSON.stringify(session, null, 3)}`);
                     console.log(`this.session : ${JSON.stringify(this.session, null, 3)}`);
                     return true
+                }
+            },
+
+            addIncome: function() {
+                if(this.incomeAmount !== '' && this.incomeAmount !== null && this.incomeAmount !== undefined){
+                    // send api request
+                    const url = "https://mbk3bzr9d4.execute-api.us-west-1.amazonaws.com/dev/income" // straight api url
+                    let session = JSON.parse(sessionStorage.getItem('session'))
+
+                    const data = {
+                        "amount": this.incomeAmount
+                    };
+
+                    const options = {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json',
+                            "Access-Control-Allow-Origin": "*",
+                            // "Access-Control-Allow-Credentials": false,
+                            'authorizationToken': session.sessionId,
+                        },
+                        crossDomain: true,
+                        withCredentials: false,
+                        data: data,
+                        url,
+                    };
+
+                    axios(options)
+                    .then((results)=>{
+                        // update session and push to dashboard
+                        let response = results.data
+                        
+                        sessionStorage.setItem('income', this.incomeAmount)
+                        this.$router.push('dashboard')
+                        
+                    }).catch((err)=>{
+                        console.log(`err : ${JSON.stringify(err, null, 3)}`);
+                    })
+
+
                 }
             },
 

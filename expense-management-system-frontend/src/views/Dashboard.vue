@@ -20,14 +20,11 @@
         <div class="float-left pa-2">
           <h1 class="">Dashboard</h1>
 
-<!--          DO NOT NEED -->
-<!--          <v-card elevation="4" max-width="170px">-->
-<!--            <v-card-title class="text-center justify-center">Add Expense</v-card-title>-->
-<!--            <center><v-btn color="white" fab elevation="0" @click="addExpense">-->
-<!--              <v-icon color="green darken-2" large>mdi-plus-circle-outline</v-icon>-->
-<!--            </v-btn></center>-->
-<!--            <div class="py-1"></div>-->
-<!--          </v-card>-->
+         <div class="pa-3">
+           <v-card elevation="8" width="90%"  >
+             <Income></Income>
+           </v-card>
+          </div>
 
           <div class="pa-3">
             <v-card max-width="90%" elevation="8">
@@ -78,6 +75,7 @@
   import Chart from "../components/Chart";
   import ExpenseHistory from "../components/ExpenseHistory";
   import axios from "axios";
+  import Income from "../components/Income";
 
     export default {
         name: "Dashboard",
@@ -85,7 +83,8 @@
             ResponsiveNavView,
             Graph,
             Chart,
-            ExpenseHistory
+            ExpenseHistory,
+            Income
         },
         data() {
             return {

@@ -150,6 +150,13 @@
                                 let expenses = ex.reverse()
                                 sessionStorage.setItem('expenses', JSON.stringify(expenses))
                             }
+
+                            if(response.user.income){
+                                sessionStorage.setItem('income', JSON.stringify(response.user.income))
+                            } else {
+                                sessionStorage.setItem('income', "0")
+                            }
+
                             this.$router.push('dashboard')
                         }
                     })

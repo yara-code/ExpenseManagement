@@ -26,7 +26,7 @@
                   <v-card-text>Username:</v-card-text>
                 </td>
                 <td>
-                  <v-text-field class="px-2"  v-model="username" label="Username" outlined shaped></v-text-field>
+                  <v-text-field class="px-2 mt-2"  v-model="username" label="Username" outlined shaped></v-text-field>
                 </td>
               </tr>
 
@@ -39,23 +39,23 @@
                 </td>
               </tr>
 
-              <tr>
-                <td>
-                  <v-card-text>Current Password::</v-card-text>
-                </td>
-                <td>
-                  <v-text-field
-                          v-model="cPassword"
-                          outlined shaped label="Current Password"
-                          :type="show2 ? 'text' : 'password'"
-                          name="input-10-2"
-                          hint="At least 8 characters"
-                          value=""
-                          class="input-group--focused px-2"
+<!--              <tr>-->
+<!--                <td>-->
+<!--                  <v-card-text>Current Password::</v-card-text>-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                  <v-text-field-->
+<!--                          v-model="cPassword"-->
+<!--                          outlined shaped label="Current Password"-->
+<!--                          :type="show2 ? 'text' : 'password'"-->
+<!--                          name="input-10-2"-->
+<!--                          hint="At least 8 characters"-->
+<!--                          value=""-->
+<!--                          class="input-group&#45;&#45;focused px-2"-->
 
-                  ></v-text-field>
-                </td>
-              </tr>
+<!--                  ></v-text-field>-->
+<!--                </td>-->
+<!--              </tr>-->
 
               <tr>
                 <td>
@@ -141,11 +141,58 @@
                 this.$router.push('/expense')
             },
 
+
+            save: function(){
+
+                let update = null
+
+                if(this.nPassword !== "" &&  this.confirmPassword !== "" ){
+                  if(this.nPassword !== this.confirmPassword){
+                      // show error
+                  } else {
+                    // Update password
+                      update.password = this.nPassword
+                  }
+                }
+
+                if(this.username !== this.sessionData.user.username){
+                    // update username
+                    update.username = this.username
+                }
+
+                if(this.email !== this.sessionData.user.email){
+                    //update email
+                    update.email = this.email
+                }
+
+
+                // check if update is null
+                if(update != null){
+                    // update request
+                } else {
+                    // do nothing
+                }
+
+            },
+
+            settings: function () {
+                let session = JSON.parse(sessionStorage.getItem('session'))
+                let user = session.user
+
+                this.username = user.username
+                this.email = user.email
+
+
+            }
+
         },
         computed: {
             callSessionCheck: function () {
                 return this.sessionCheck();
             }
+        },
+        mounted() {
+          this.settings()
         }
     }
 </script>
