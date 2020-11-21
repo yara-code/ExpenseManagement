@@ -29,9 +29,9 @@
 
                 let done = (this.spent / this.income) * 100;
                 done = done > 100 ? 100 : done.toFixed(2)
-                console.log(`done : ${done}`);
-                console.log(`income : ${this.income}`);
-                console.log(`spent : ${this.spent}`);
+                // console.log(`done : ${done}`);
+                // console.log(`income : ${this.income}`);
+                // console.log(`spent : ${this.spent}`);
                 setTimeout(()=>{
                     progress.style.opacity = 1;
                     progress.style.width = done + "%"
@@ -39,7 +39,11 @@
                 }, 500);
             },
             getIncome(){
-                let income = Number(sessionStorage.getItem('income')) ? Number(sessionStorage.getItem('income')) : 0
+                let income = sessionStorage.getItem('income')
+                let parsedIncome = JSON.parse(income)
+                let incomeAmount = Number(parsedIncome.amount)
+                console.log(`incomeAmount  : ${incomeAmount}`);
+
                 let expenses = sessionStorage.getItem('expenses') ? sessionStorage.getItem('expenses') : 0
                 let parsedExpenses = JSON.parse(expenses)
                 let today = new Date()
@@ -54,7 +58,7 @@
                         spent += Number(expense.amount)
                     }
                 })
-                this.income = income.toFixed(2)
+                this.income = incomeAmount.toFixed(2)
                 this.spent = spent.toFixed(2)
                 this.setProgress();
             },

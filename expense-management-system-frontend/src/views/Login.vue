@@ -151,10 +151,13 @@
                                 sessionStorage.setItem('expenses', JSON.stringify(expenses))
                             }
 
+
                             if(response.user.income){
-                                sessionStorage.setItem('income', JSON.stringify(response.user.income))
+                                let income = {amount : response.user.income}
+                                sessionStorage.setItem('income', JSON.stringify(income))
                             } else {
-                                sessionStorage.setItem('income', "0")
+                                let income = {amount : 0}
+                                sessionStorage.setItem('income', income)
                             }
 
                             this.$router.push('dashboard')
