@@ -129,7 +129,7 @@
                   console.log(`testing validation `);
                   // API call to create an account:
 
-                  const url = "https://mbk3bzr9d4.execute-api.us-west-1.amazonaws.com/dev//user" // local client + lambbda server
+                  const url = "https://mbk3bzr9d4.execute-api.us-west-1.amazonaws.com/dev/user" // local client + lambbda server
                   // const url = "http://localhost:3000/user" // local client + local server testing
                   const data = {
                       "name": this.name,
@@ -143,7 +143,7 @@
                       headers: {
                           'content-type': 'application/json',
                           "Access-Control-Allow-Origin": "*",
-                          "Access-Control-Allow-Credentials": false
+                          // "Access-Control-Allow-Credentials": false
                       },
                       crossDomain: true,
                       withCredentials: false,

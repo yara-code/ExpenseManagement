@@ -13,6 +13,7 @@
 
             let expenses = sessionStorage.getItem('expenses')
             let parsedExpenses = JSON.parse(expenses)
+            // console.log(`parse : ${JSON.stringify(parsedExpenses, null, 3)}`);
 
             let income = 0 //1000;
             let food = 0 //105.254;
@@ -23,19 +24,27 @@
             let rent = 0 //1950.00;
 
             parsedExpenses.forEach((expense)=>{
-                switch(expense.category){
+                // console.log(`ex : ${JSON.stringify(expense, null, 3)}`);
+                switch(expense.category.toLowerCase()){
                     case 'food':
-                        food += expense.amount
+                        food += Number(expense.amount)
+                        break;
                     case 'clothes':
-                        clothes += expense.amount
+                        clothes += Number(expense.amount)
+                        break;
                     case 'bills':
-                        bills += expense.amount
+                        bills += Number(expense.amount)
+                        break;
                     case 'entertainment':
-                        entertainment += expense.amount
+                        entertainment += Number(expense.amount)
+                        break;
                     case 'rent':
-                        rent += expense.amount
+                        rent += Number(expense.amount)
+                        break;
                     case 'other':
-                        other += expense.amount
+                        other += Number(expense.amount)
+                        break;
+                    break
                 }
             })
 

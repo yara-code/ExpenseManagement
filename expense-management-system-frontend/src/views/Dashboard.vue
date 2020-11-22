@@ -20,20 +20,22 @@
         <div class="float-left pa-2">
           <h1 class="">Dashboard</h1>
 
+<!--          trackewr trends-->
          <div class="pa-3">
            <v-card elevation="8" width="90%"  >
-             <Income></Income>
+             <v-row>
+               <v-col>
+                 <Income></Income>
+               </v-col>
+               <v-col>
+                 <Trend></Trend>
+               </v-col>
+             </v-row>
+
            </v-card>
           </div>
 
-          <div class="pa-3">
-            <v-card max-width="90%" elevation="8">
-              <v-card-title class="justify-center">Expense History</v-card-title>
-              <ExpenseHistory></ExpenseHistory>
-            </v-card>
-          </div>
-
-
+<!--graph and charts-->
           <v-row>
             <v-col>
               <div class="pt-8">
@@ -56,7 +58,13 @@
             </v-col>
           </v-row>
 
-
+          <!--          expense history-->
+          <div class="pa-3">
+            <v-card max-width="90%" elevation="8">
+              <v-card-title class="justify-center">Expense History</v-card-title>
+              <ExpenseHistory></ExpenseHistory>
+            </v-card>
+          </div>
 
 
         </div>
@@ -76,6 +84,7 @@
   import ExpenseHistory from "../components/ExpenseHistory";
   import axios from "axios";
   import Income from "../components/Income";
+  import Trend from "../components/Trend";
 
     export default {
         name: "Dashboard",
@@ -84,7 +93,8 @@
             Graph,
             Chart,
             ExpenseHistory,
-            Income
+            Income,
+            Trend
         },
         data() {
             return {

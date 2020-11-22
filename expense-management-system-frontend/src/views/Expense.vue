@@ -157,15 +157,12 @@
                     .then((results)=>{
                         // update session and push to dashboard
                         let response = results.data
-                        
-                        sessionStorage.setItem('income', this.incomeAmount)
+                        let income = {amount :this.incomeAmount}
+                        sessionStorage.setItem('income', JSON.stringify(income))
                         this.$router.push('dashboard')
-                        
                     }).catch((err)=>{
                         console.log(`err : ${JSON.stringify(err, null, 3)}`);
                     })
-
-
                 }
             },
 

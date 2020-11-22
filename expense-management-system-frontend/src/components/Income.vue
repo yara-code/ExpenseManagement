@@ -1,11 +1,12 @@
 <template>
   <div>
         <v-card-title>Monthly Income Tracker</v-card-title>
+    <v-card-subtitle>Percentage of Income spent for the month</v-card-subtitle>
         <v-card-text class="text-left">Total Income: ${{income}}</v-card-text>
         <div class="progress mx-3" >
-          <div class="progress-done white--text">{{progressDone}}</div>
+          <div class="progress-done white--text ">{{progressDone}}</div>
         </div>
-        <v-card-text class="text-left">Total amount spent for the month: ${{spent}}</v-card-text>
+        <v-card-text class="text-left">Current amount spent for the month: ${{spent}}</v-card-text>
   </div>
 </template>
 
@@ -26,23 +27,31 @@
             setProgress(){
                 let progress= document.querySelector('.progress-done');
 
-
+                // let done = (this.spent / 300) * 100;
                 let done = (this.spent / this.income) * 100;
                 done = done > 100 ? 100 : done.toFixed(2)
-                // console.log(`done : ${done}`);
-                // console.log(`income : ${this.income}`);
-                // console.log(`spent : ${this.spent}`);
+
+
                 setTimeout(()=>{
-                    progress.style.opacity = 1;
-                    progress.style.width = done + "%"
-                    this.progressDone = done + "%"
+                    if(done == NaN || done == "NaN"){
+                        done = 0
+                    } else {
+                        progress.style.opacity = 1;
+                        if(done < 16){
+                            progress.style.width = 16 + "%"
+                            progress.classList.add('text-caption')
+                        } else {
+                            progress.style.width = done + "%"
+                        }
+                        this.progressDone = done + "%"
+                    }
+
                 }, 500);
             },
             getIncome(){
                 let income = sessionStorage.getItem('income')
                 let parsedIncome = JSON.parse(income)
                 let incomeAmount = Number(parsedIncome.amount)
-                console.log(`incomeAmount  : ${incomeAmount}`);
 
                 let expenses = sessionStorage.getItem('expenses') ? sessionStorage.getItem('expenses') : 0
                 let parsedExpenses = JSON.parse(expenses)
