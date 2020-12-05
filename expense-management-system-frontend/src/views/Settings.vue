@@ -20,6 +20,7 @@
         <h1 class="text-center">Settings</h1>
         <div class="pa-3">
           <v-card class="" max-width="1000px">
+            <v-card-text  class="text-center red--text" v-if="seen" >{{ errorMessageSetting }}</v-card-text>
             <v-simple-table >
               <tr>
                 <td>
@@ -122,6 +123,8 @@
                 confirmPassword: "",
                 show2: false,
                 sessionData: {},
+                errorMessageSetting: "",
+                seen: false,
             }
         },
         methods: {
@@ -148,13 +151,23 @@
                 let update = {}
 
                 if(this.nPassword !== "" &&  this.confirmPassword !== "" ){
+
                   if(this.nPassword !== this.confirmPassword){
                       // show error
+                      this.seen = true
+                  }
+                  else if(this.nPassword.length < 7){
+                      console.log(`npassword : ${this.nPassword}`);
+                      console.log(`conifrmpasssword : ${this.confirmPassword}`);
+                      console.log(`password not 7 characters :}`);
+                      this.errorMessageSetting = 'Password needs to be 7 characters or more.'
+                     this.seen = true
                   } else {
                     // Update password
                       update.password = this.nPassword
                   }
                 }
+
 
                 if(this.username !== this.sessionData.user.username){
                     // update username
@@ -167,7 +180,7 @@
                 }
 
                 // check if update is null
-                if(update && (update.password || update.username || update.email)){
+                if(update && (update.password || update.username || update.email) && this.seen == false){
                     // update request
                     let session = JSON.parse(sessionStorage.getItem('session'))
                     const url = `https://mbk3bzr9d4.execute-api.us-west-1.amazonaws.com/dev/user/${session.accountId}` // straight api url
@@ -214,6 +227,22 @@
                         })
                 } else {
                     // do nothing
+                    if(this.username == this.sessionData.user.username && this.email == this.sessionData.user.email && this.nPassword == "" &&  this.confirmPassword == "" ){
+                        this.errorMessageSetting = 'No Changes were made.'
+                    }
+                    if((this.nPassword !== "" || this.confirmPassword !== "") && this.nPassword.length < 7){
+                        this.errorMessageSetting = 'Password needs to be 7 characters or more.'
+                    }
+                    if((this.nPassword !== "" || this.confirmPassword !== "") && this.nPassword !== this.confirmPassword){
+                        console.log(`matching if  :`);
+                        this.errorMessageSetting = 'Passwords do not match'
+                    }
+
+                    // this.errorMessageSetting = 'No Changes were made.'
+                    this.seen = true
+                    setTimeout(()=>{
+                        this.seen = false
+                    }, 4000)
                 }
 
             },
