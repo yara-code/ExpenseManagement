@@ -159,10 +159,12 @@
                           let response = results.data;
                           // log in successful:
                           this.accountCreate = true;
-                          this.password = ''
-                          this.confirmPassword = '';
-                          this.name = '';
-                          setTimeout(() => { this.accountCreate = false; this.$router.push('login') }, 3000)
+                          setTimeout(() => {
+                              this.accountCreate = false; this.$router.push('login')
+                              this.password = ''
+                              this.confirmPassword = '';
+                              this.name = '';
+                          }, 3000)
                       })
                       .catch((error)=>{
                           console.log(`error : ${JSON.stringify(error, null, 3)}`);

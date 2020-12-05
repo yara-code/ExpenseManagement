@@ -67,7 +67,7 @@
                           outlined shaped label="New Password"
                           :type="show2 ? 'text' : 'password'"
                           name="input-10-2"
-                          hint="At least 8 characters"
+                          hint="At least 7 characters"
                           value=""
                           class="input-group--focused px-2"
 
@@ -86,7 +86,7 @@
                           outlined shaped label="Confirm Password"
                           :type="show2 ? 'text' : 'password'"
                           name="input-10-2"
-                          hint="At least 8 characters"
+                          hint="At least 7 characters"
                           value=""
                           class="input-group--focused px-2"
 
@@ -108,6 +108,7 @@
 
 <script>
     import ResponsiveNavView from "../components/ResponsiveNavView";
+    import axios from "axios";
 
     export default {
         name: "Settings",
@@ -144,7 +145,7 @@
 
             save: function(){
 
-                let update = null
+                let update = {}
 
                 if(this.nPassword !== "" &&  this.confirmPassword !== "" ){
                   if(this.nPassword !== this.confirmPassword){
@@ -165,10 +166,52 @@
                     update.email = this.email
                 }
 
-
                 // check if update is null
-                if(update != null){
+                if(update && (update.password || update.username || update.email)){
                     // update request
+                    let session = JSON.parse(sessionStorage.getItem('session'))
+                    const url = `https://mbk3bzr9d4.execute-api.us-west-1.amazonaws.com/dev/user/${session.accountId}` // straight api url
+
+                    const data = {
+                        "username": update && update.username ? update.username : "",
+                        "email": update && update.email ? update.email : "",
+                        "password": update && update.password ? update.password :""
+                    };
+                    
+                    
+                    const options = {
+                        method: 'PUT',
+                        headers: {
+                            'content-type': 'application/json',
+                            "Access-Control-Allow-Origin": "*",
+                            // "Access-Control-Allow-Credentials": false,
+                            'authorizationToken': session.sessionId,
+                        },
+                        crossDomain: true,
+                        withCredentials: false,
+                        data: data,
+                        url,
+                    };
+
+                    axios(options)
+                        .then((results)=>{
+                            let response = results.data
+
+                            let newSesstion = sessionStorage.getItem('session')
+                            let parsedSession = JSON.parse(newSesstion)
+                            if(data.username != ""){
+                                parsedSession.username = data.username
+                                parsedSession.user.username = data.username
+                            }
+                            if(data.email != ""){
+                              parsedSession.user.email = data.email
+                            }
+                            sessionStorage.setItem('session', JSON.stringify(parsedSession))
+                            this.$router.push('dashboard')
+                        })
+                        .catch((err)=>{
+                            console.log(`err : ${JSON.stringify(err, null, 3)}`);
+                        })
                 } else {
                     // do nothing
                 }
