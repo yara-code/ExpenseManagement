@@ -1,31 +1,30 @@
 <template>
   <div>
-<!--    quick messsage-->
+    <!--    quick messsage-->
     <section class="topBanner" >
 
     </section>
 
-<!--    white bar-->
+    <!--    white bar-->
     <section class="middleBanner">
       <div class="mx-1 pa-1 ">
         <v-img class="float-left" height="43px" width="43px" src="../assets/icons.png"></v-img>
         <div class="my-1">
-          <v-hover  class="float-left"><v-btn text elevation="0" >How It Works</v-btn></v-hover>
-          <v-hover class="float-left"><v-btn text elevation="0">Track</v-btn></v-hover>
-          <v-hover class="float-left"><v-btn text elevation="0">Trends</v-btn></v-hover>
+          <v-hover  class="float-left"><v-btn text elevation="0" ></v-btn></v-hover>
+          <v-hover class="float-left"><v-btn text elevation="0"></v-btn></v-hover>
+          <v-hover class="float-left"><v-btn text elevation="0"></v-btn></v-hover>
         </div>
       </div>
       <v-btn class="float-right mx-4" small outlined @click="routeLogin">Login</v-btn>
       <v-btn class="float-right white--text" small color="green" @click="routeSignup">Sign up</v-btn>
     </section>
 
-<!--Hero header and test    -->
+    <!--Hero header and test    -->
     <section class="color1 hero white--text">
       <div>
-        <h1 class="pa-4 ">Manage your expense with our app</h1>
-        <span class="pa-2">To Get started create an account and sign.</span><br>
-        <span >Enter your bills, income, and expense. </span>
-        <span >Get Weekly, monthly and Yearly projections</span>
+        <h1 class="pa-4 ">Manage All Your Finances In One Place.</h1>
+        <span class="pa-2">Easy-to-read reports and dashboards help you make smarter financial decisions.</span><br>
+        <span >Create an account to get started. </span><br>
       </div>
       <div class="mt-5">
         <v-btn outlined class="ma-2" color="white" @click="routeSignup">Sign up free</v-btn>
@@ -35,30 +34,30 @@
     <section class="callToAction color2" style="width: 100%">
       <v-container style="width: 100%">
         <v-layout row wrap style="width: 90%">
-          <v-flex xs12 md4 lg4 xl4 class="pa-1">
-            <h2 class="text-left">Track expenses and see your trends</h2>
-            <p class="text-left">We calculate average spending by category, so you can easily create a budget based on spending patterns. See how much you’re spending on what, year-to-year or month-to-month.</p>
+          <v-flex xs12 md4 lg4 xl4 class="pa-1"><br><br><br><br><br><br>
+            <h2 class="text-left">Know Where Your Money Is Going</h2>
+            <p class="text-left">EMS boils budgeting down to the only thing you want to know: how much you have for spending. It crunches the numbers to show you how much money is available after accounting for bills and other spendings. View how much money is left “in your pocket” for the rest of month. </p>
           </v-flex>
           <v-flex xs12 md8 lg8 xl6 class="pa-1">
-            <v-img  src="../assets/demo2.jpg"></v-img>
+            <v-img  src="../assets/demo2-2.jpg"></v-img>
           </v-flex>
         </v-layout>
       </v-container>
     </section>
 
-<!--    second note-->
+    <!--    second note-->
     <section class="callToAction2">
       <v-container style="width: 100%">
         <v-layout row wrap style="width: 90%">
           <v-flex  xs12 md8 lg8 xl6 class="pa-1 d-xs-none">
-            <v-img class="d-none d-md-block" src="../assets/demo4.jpg"></v-img>
+            <v-img class="d-none d-md-block" src="../assets/demo4-2.jpg"></v-img>
           </v-flex>
-          <v-flex xs12 md4 lg4 xl4 class="pa-1">
-            <h2 class="text-left">Know your trends with our projections</h2>
-            <p class="text-left">We’ll show you exactly how your spending decisions affect the money you have at the end of the month or year. You’ll know what you can do today to save more tomorrow. </p>
+          <v-flex xs12 md4 lg4 xl4 class="pa-1"><br><br><br><br><br><br>
+            <h2 class="text-left">Let Us Do The Math For You</h2>
+            <p class="text-left"> Our insightful tools offer monthly spending projections and daily spending averages, which provide a more inclusive financial picture beyond just transactions. Dial it down farther and keep track of certain categories of spending — like groceries, clothing or eating out. </p>
           </v-flex>
           <v-flex  xs12 md8 lg8 xl6 class="pa-1 d-xs-none">
-            <v-img class="d-sm-block d-md-none" src="../assets/demo4.jpg"></v-img>
+            <v-img class="d-sm-block d-md-none" src="../assets/demo4-2.jpg"></v-img>
           </v-flex>
         </v-layout>
       </v-container>
@@ -68,12 +67,12 @@
     <section class="callToAction3 color2">
       <v-container style="width: 100%">
         <v-layout row wrap style="width: 90%">
-          <v-flex xs12 md4 lg4 xl4 class="pa-1">
-            <h2 class="text-left">Know your trends with our projections</h2>
-            <p class="text-left">We’ll show you exactly how your spending decisions affect the money you have at the end of the month or year. You’ll know what you can do today to save more tomorrow. </p>
+          <v-flex xs12 md4 lg4 xl4 class="pa-1"><br><br><br><br><br><br>
+            <h2 class="text-left">Personal Finance Simplified</h2>
+            <p class="text-left">Almost everyone wants to improve how they save and budget their money — and we have taken notice by releasing a steady stream of financial tools to lend a hand. We created this app with simplicity and excellence in mind.</p>
           </v-flex>
           <v-flex xs12 md8 lg8 xl6 class="pa-1">
-            <v-img  src="../assets/demo3.jpg"></v-img>
+            <v-img  src="../assets/demo3-2.jpg"></v-img>
           </v-flex>
         </v-layout>
       </v-container>
@@ -82,8 +81,8 @@
     <!--    sign up -->
     <section class="">
       <center><div class="ma-8">
-        <h1>Sign up for Expense ME</h1>
-        <p class="ma-2">From tracking to spending projections you’ll discover the effortless way to stay on top of it all.  </p>
+        <h1>Sign up for EMS</h1>
+        <p class="ma-2">From tracking to spending and projections you’ll discover the effortless way to stay on top of it all.  </p>
         <v-btn class="ma-2 white--text" color="green" @click="routeSignup">Sign Up free</v-btn>
       </div></center>
     </section>

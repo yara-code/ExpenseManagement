@@ -55,8 +55,16 @@
               let daysInMonth = new Date(yyyy, mm, 0).getDate();
               let daysRemaining = Number(daysInMonth) - Number(mm)
 
+              //TODO: trendingSpent does not add already spent expenses
+              //TODO: ---------------->
               // take the remaining days and multiple by the average then add what is already spent:
+              console.log(`avg: ${JSON.stringify(avg, null, 3)}`);
+              console.log(`daysRemainning : ${JSON.stringify(daysRemaining, null, 3)}`);
+              console.log(`avg*daysRemaininng : ${avg * daysRemaining}`);
+              console.log(`avg*daysRemaininng   ) + spent : ${(avg * daysRemaining) + spent}`);
+              console.log(`spent : ${JSON.stringify(spent, null, 3)}`);
               let trending = (avg * daysRemaining) + spent
+
               this.trendingSpent = trending.toFixed(2)
               this.setProgressTrends()
           },

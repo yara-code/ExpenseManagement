@@ -10,9 +10,9 @@
       <div class="mx-1 pa-1 ">
         <v-img @click="gohome" class="float-left" height="43px" width="43px" src="../assets/icons.png"></v-img>
         <div class="my-1">
-          <v-hover  class="float-left"><v-btn text elevation="0" >How It Works</v-btn></v-hover>
-          <v-hover class="float-left"><v-btn text elevation="0">Track</v-btn></v-hover>
-          <v-hover class="float-left"><v-btn text elevation="0">Trends</v-btn></v-hover>
+          <v-hover  class="float-left"><v-btn text elevation="0" ></v-btn></v-hover>
+          <v-hover class="float-left"><v-btn text elevation="0"></v-btn></v-hover>
+          <v-hover class="float-left"><v-btn text elevation="0"></v-btn></v-hover>
         </div>
       </div>
       <v-btn class="float-right mx-4" small outlined @click="routeLogin">Login</v-btn>
